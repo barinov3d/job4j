@@ -15,6 +15,7 @@
 
     <modules>
        <module>chapter_001</module>
+        <module>collections_pro</module>
      </modules>
 	 
 	 <dependencies>
