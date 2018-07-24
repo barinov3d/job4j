@@ -7,44 +7,36 @@ import java.util.NoSuchElementException;
  * Iterator for two-dimensional array
  */
 public class MatrixIterator implements Iterator {
-    int[][] array;
-    int lineIndex;
-    int rowIndex;
-    int lineIndexMax;
-    int rowIndexMax;
+    private int[][] data;
+    private int row;
+    private int cell;
 
-    public MatrixIterator(int[][] array) {
-        this.array = array;
-        lineIndex = 0;
-        rowIndex = 0;
-        lineIndexMax = array.length;
-        try {
-            rowIndexMax = array[lineIndex].length;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Array is empty");
-            rowIndexMax = -1;
-        }
+    public MatrixIterator(int[][] data) {
+        this.data = data;
+        row = 0;
+        cell = 0;
     }
 
     public boolean hasNext() {
-        if (!(lineIndex == lineIndexMax - 1)) {
-            return rowIndex <= rowIndexMax;
+        boolean result;
+        if (!(row == data.length - 1)) {
+            result = cell <= data[row].length;
         } else {
-            return rowIndex < rowIndexMax;
+            result = cell < data[row].length;
         }
+        return result;
     }
 
     public Object next() {
-        if (rowIndexMax == -1) {
+        if (data.length == 0) {
+            /*это не соответствует замечанию "никаких эксепшенов в коде быть не должно", но как по-дугому - не знаю!
+            у меня вылетает ArrayIndexOutOfBoundsException, а не NoSuchElementException */
             throw new NoSuchElementException("No such element");
         }
-        if (rowIndex < rowIndexMax) {
-            return array[lineIndex][rowIndex++];
-        } else {
-            rowIndex = 0;
-            rowIndexMax = array[++lineIndex].length;
-            return array[lineIndex][rowIndex++];
+        if (cell >= data[row].length) {
+            cell = 0;
+            row++;
         }
+        return data[row][cell++];
     }
-
 }
