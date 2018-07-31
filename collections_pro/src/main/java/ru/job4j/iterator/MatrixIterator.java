@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Iterator for two-dimensional array
+ * Iterator for two-dimensional data
  */
 public class MatrixIterator implements Iterator {
     private int[][] data;
