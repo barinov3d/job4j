@@ -1,6 +1,7 @@
 package ru.job4j.iterator;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Iterator for two-dimensional array
@@ -8,6 +9,7 @@ import java.util.Iterator;
 public class EvenNumbersIterator implements Iterator {
     private int[] data;
     private int index;
+    private boolean indexExist;
 
     public EvenNumbersIterator(int[] data) {
         this.data = data;
@@ -15,26 +17,26 @@ public class EvenNumbersIterator implements Iterator {
     }
 
     public boolean hasNext() {
+        return getIndex();
+    }
+
+    public Object next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        getIndex();
+        return data[index++];
+    }
+
+    private boolean getIndex() {
         boolean result = false;
-        for (int i = index; i <= data.length - 1; i++) {
+        for (int i = index; i < data.length; i++) {
             if (data[i] % 2 == 0) {
+                index = i;
                 result = true;
                 break;
             }
         }
-        return (index <= data.length - 1) && result;
+        return result;
     }
-
-    public Object next() {
-        int result = index;
-        for (int i = index; i < data.length - 1; i++) {
-            if (data[i] % 2 == 0) {
-                result = i;
-                break;
-            }
-        }
-        index = result;
-        return data[index++];
-    }
-    /*Не знаю как сделать так чтобы вылетал NoSuchElementException, 4 тест непроходит!!*/
 }
