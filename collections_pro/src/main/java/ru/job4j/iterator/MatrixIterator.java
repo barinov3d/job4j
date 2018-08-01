@@ -19,7 +19,9 @@ public class MatrixIterator implements Iterator {
 
     public boolean hasNext() {
         boolean result;
-        if (!(row == data.length - 1)) {
+        if (data.length == 0) {
+            result = false;
+        } else if (!(row == data.length - 1)) {
             result = cell <= data[row].length;
         } else {
             result = cell < data[row].length;
@@ -28,9 +30,7 @@ public class MatrixIterator implements Iterator {
     }
 
     public Object next() {
-        if (data.length == 0) {
-            /*это не соответствует замечанию "никаких эксепшенов в коде быть не должно", но как по-дугому - не знаю!
-            у меня вылетает ArrayIndexOutOfBoundsException, а не NoSuchElementException */
+        if (!hasNext()) {
             throw new NoSuchElementException("No such element");
         }
         if (cell >= data[row].length) {
