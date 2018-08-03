@@ -30,10 +30,10 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenDeleteElementsGetCorrectResult() {
-        list.delete();
+        System.out.println("Delete node with value: " + list.delete());
         assertThat(list.get(0), is(2));
         assertThat(list.getSize(), is(2));
-        list.delete();
+        System.out.println("Delete node with value: " + list.delete());
         assertThat(list.get(0), is(1));
         assertThat(list.getSize(), is(1));
     }
