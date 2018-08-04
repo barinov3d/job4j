@@ -24,7 +24,6 @@ public class EvenNumbersIterator implements Iterator {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        getIndex();
         return data[index++];
     }
 
