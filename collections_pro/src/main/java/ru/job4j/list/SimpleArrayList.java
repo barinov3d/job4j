@@ -5,14 +5,14 @@ package ru.job4j.list;
  */
 public class SimpleArrayList<E extends Number> {
 
-    private int size;
+    protected int size;
     private Node<E> first;
 
     /**
      * Метод вставляет в начало списка данные.
      */
-    public void add(E date) {
-        Node<E> newLink = new Node<>(date);
+    public void add(E data) {
+        Node<E> newLink = new Node<>(data);
         newLink.next = this.first;
         this.first = newLink;
         this.size++;
@@ -22,7 +22,7 @@ public class SimpleArrayList<E extends Number> {
      * Реализовать метод удаления первого элемент в списке.
      */
     public E delete() {
-        E value = this.first.date;
+        E value = this.first.data;
         this.first = this.first.next;
         this.size--;
         return value;
@@ -31,12 +31,12 @@ public class SimpleArrayList<E extends Number> {
     /**
      * Метод получения элемента по индексу.
      */
-    public E get(int index) {
+    public Node<E> get(int index) {
         Node<E> result = this.first;
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
-        return result.date;
+        return result;
     }
 
     /**
@@ -49,13 +49,13 @@ public class SimpleArrayList<E extends Number> {
     /**
      * Класс предназначен для хранения данных.
      */
-    private static class Node<E> {
+    public static class Node<E> {
 
-        E date;
+        E data;
         Node<E> next;
 
-        Node(E date) {
-            this.date = date;
+        Node(E data) {
+            this.data = data;
         }
     }
 }

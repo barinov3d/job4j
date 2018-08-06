@@ -20,7 +20,7 @@ public class SimpleArrayListTest {
 
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
-        assertThat(list.get(0), is(3));
+        assertThat(list.get(0).data, is(3));
     }
 
     @Test
@@ -31,10 +31,10 @@ public class SimpleArrayListTest {
     @Test
     public void whenDeleteElementsGetCorrectResult() {
         System.out.println("Delete node with value: " + list.delete());
-        assertThat(list.get(0), is(2));
+        assertThat(list.get(0).data, is(2));
         assertThat(list.getSize(), is(2));
         System.out.println("Delete node with value: " + list.delete());
-        assertThat(list.get(0), is(1));
+        assertThat(list.get(0).data, is(1));
         assertThat(list.getSize(), is(1));
     }
 }
