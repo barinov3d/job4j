@@ -8,7 +8,7 @@ import java.util.Iterator;
  * Created by Дмитрий on 07.08.2018.
  */
 public class ArraySet<E extends Number> implements Iterable<E> {
-    private DynamicList list = new DynamicList();
+    private DynamicList<E> list = new DynamicList();
 
     void add(E e) {
         boolean alreadyInCollection = false;
