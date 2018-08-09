@@ -18,13 +18,9 @@ public class MatrixIterator implements Iterator {
     }
 
     public boolean hasNext() {
-        boolean result;
-        if (data.length == 0) {
-            result = false;
-        } else if (!(row == data.length - 1)) {
+        boolean result = false;
+        if (!((row == data.length - 1) && (cell == data[row].length)) && data.length != 0) {
             result = cell <= data[row].length;
-        } else {
-            result = cell < data[row].length;
         }
         return result;
     }
