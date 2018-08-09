@@ -5,7 +5,7 @@ package ru.job4j.list;
  */
 public class SimpleStack<T extends Number> extends SimpleArrayList<T> {
     public T poll() {
-        return delete();
+        return dropLast();
     }
 
     public void push(T value) {

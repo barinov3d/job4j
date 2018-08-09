@@ -5,7 +5,7 @@ package ru.job4j.list;
  */
 public class SimpleArrayList<E extends Number> {
 
-    protected int size;
+    private int size;
     private Node<E> first;
 
     /**
@@ -46,6 +46,16 @@ public class SimpleArrayList<E extends Number> {
         return this.size;
     }
 
+    public E dropFirst() {
+        E result = get(getSize() - 1).data;
+        get(getSize() - 2).next = null;
+        size--;
+        return result;
+    }
+
+    public E dropLast() {
+        return delete();
+    }
     /**
      * Класс предназначен для хранения данных.
      */
