@@ -10,8 +10,8 @@ import java.util.NoSuchElementException;
 public class DynamicList<E> implements Iterable<E> {
     private int size = 5;
     private int index = 0;
-    int modCount = 0;
-    Object[] container = new Object[size];
+    private int modCount = 0;
+    private Object[] container = new Object[size];
 
     public void add(E value) {
         if (index > size - 1) {
@@ -42,7 +42,7 @@ public class DynamicList<E> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int expectedModCount = 0;
+            private int expectedModCount = 0;
 
             @Override
             public boolean hasNext() {
@@ -59,8 +59,9 @@ public class DynamicList<E> implements Iterable<E> {
             }
 
             final void checkForComodification() {
-                if (modCount != expectedModCount)
+                if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
+                }
             }
         };
     }

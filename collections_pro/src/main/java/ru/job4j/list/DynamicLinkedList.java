@@ -79,8 +79,9 @@ public class DynamicLinkedList<E extends Number> implements Iterable<E> {
             }
 
             final void checkForComodification() {
-                if (modCount != expectedModCount)
+                if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
+                }
             }
         };
     }
