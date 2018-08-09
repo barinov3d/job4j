@@ -12,7 +12,7 @@ public class DynamicLinkedList<E extends Number> implements Iterable<E> {
     private int size;
     private Node<E> first;
     private Node<E> node;
-    int modCount = 0;
+    private int modCount = 0;
 
     /**
      * Метод вставляет в начало списка данные.
@@ -49,10 +49,10 @@ public class DynamicLinkedList<E extends Number> implements Iterable<E> {
      */
     private static class Node<E> {
 
-        E value;
-        Node<E> next;
+        private E value;
+        private Node<E> next;
 
-        Node(E value) {
+        public Node(E value) {
             this.value = value;
         }
     }
@@ -60,7 +60,7 @@ public class DynamicLinkedList<E extends Number> implements Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int expectedModCount = 0;
+            private int expectedModCount = 0;
 
             @Override
             public boolean hasNext() {
