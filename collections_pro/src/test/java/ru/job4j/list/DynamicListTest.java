@@ -38,7 +38,7 @@ public class DynamicListTest {
     @Test
     public void whenAddValueBiggerThenSizeItShouldBeIncreased() {
         list.add(6);
-        assertThat(list.getSize(), is(10));
+        assertThat(list.size(), is(10));
         assertThat(list.get(5), is(6));
     }
 

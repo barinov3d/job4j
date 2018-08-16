@@ -12,7 +12,7 @@ public class ArraySet<E extends Number> implements Iterable<E> {
 
     void add(E e) {
         boolean alreadyInCollection = false;
-        for (int i = 0; i < list.getSize() - 1; i++) {
+        for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(i) == e) {
                 alreadyInCollection = true;
             }
@@ -34,8 +34,8 @@ public class ArraySet<E extends Number> implements Iterable<E> {
     /**
      * Метод получения размера коллекции.
      */
-    public int getSize() {
-        return list.getSize();
+    public int size() {
+        return list.size();
     }
 
 }

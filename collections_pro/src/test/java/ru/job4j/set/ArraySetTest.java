@@ -22,6 +22,6 @@ public class ArraySetTest {
         set.add(2);
         assertThat(set.get(0), is(1));
         assertThat(set.get(1), is(2));
-        assertThat(set.getSize(), is(5));
+        assertThat(set.size(), is(5));
     }
 }
