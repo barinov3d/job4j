@@ -17,9 +17,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public boolean add(E parent, E child) {
+        if (!findBy(child).isPresent()) {
+            Optional<Node<E>> parentNode = findBy(parent);
+            Node<E> newNode = new Node<>(child);
+            parentNode.ifPresent(x -> x.add(newNode));
+            return true;
+        }
         return false;
     }
-
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
