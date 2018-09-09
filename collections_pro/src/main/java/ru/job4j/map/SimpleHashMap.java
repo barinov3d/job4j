@@ -6,14 +6,19 @@ import java.util.NoSuchElementException;
 public class SimpleHashMap<K, V> implements Iterator<V> {
 	private Node<K, V>[] hashTable;
 	private int size;
-	private float increaseValue;
+	private static final float increaseValue = 0.55f;
 	private float threshold;
 	private int index;
 
 	public SimpleHashMap() {
 		size = 0;
 		hashTable = new Node[16];
-		increaseValue = 0.45f;
+		threshold = hashTable.length * increaseValue;
+	}
+	
+	public SimpleHashMap(int size) {
+		this.size = 0;
+		hashTable = new Node[size];
 		threshold = hashTable.length * increaseValue;
 	}
 
@@ -33,13 +38,22 @@ public class SimpleHashMap<K, V> implements Iterator<V> {
 			return true;
 		} else
 			return false;
-	};
+	}
+	
+	private Node<K, V>[] fillAllValuesToNewArray(Node<K, V>[] newArray) {
+		SimpleHashMap<K, V> tempHashMap = new SimpleHashMap<K, V>(newArray.length);
+		for (Node<K, V> node : this.hashTable) {
+			if (node !=null) {
+				tempHashMap.insert(node.getKey(), node.getValue());
+			}
+		}
+		return tempHashMap.hashTable;
+	}
 
 	private void arrayDouble() {
-		Node<K, V>[] tempTable = new Node[hashTable.length * 2];
-		System.arraycopy(hashTable, 0, tempTable, 0, hashTable.length);
-		hashTable = tempTable;
-		threshold = hashTable.length * increaseValue;
+		Node<K, V>[] tempTable = new Node[this.hashTable.length * 2];
+		this.hashTable = fillAllValuesToNewArray(tempTable);
+		threshold = this.hashTable.length * increaseValue;
 	}
 
 	public V get(K key) throws NoSuchElementException {
@@ -163,5 +177,11 @@ public class SimpleHashMap<K, V> implements Iterator<V> {
 			return SimpleHashMap.this;
 		}
 
+	}
+
+	public void showAllElements() {
+		for (int i = 0; i < hashTable.length; i++) {
+			System.out.println(hashTable[i]);
+		}
 	}
 }
