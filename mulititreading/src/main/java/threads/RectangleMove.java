@@ -1,4 +1,4 @@
-package Treads;
+package threads;
 /**
  * Created by Дмитрий on 21.10.2018.
  */
