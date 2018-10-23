@@ -51,26 +51,32 @@ class UserStorage {
         return result;
     }
 
-    synchronized User getUserById(int id) {
-        if (isElementExist(id)) {
-            return storage.get(id);
+    User getUserById(int id) {
+        synchronized (storage) {
+            if (isElementExist(id)) {
+                return storage.get(id);
+            }
         }
         throw new NoSuchElementException("No user with id=" + id);
     }
 
-    synchronized private boolean isElementExist(int id) {
-        return storage.containsKey(id);
+    private boolean isElementExist(int id) {
+        synchronized (storage) {
+            return storage.containsKey(id);
+        }
     }
 
-    synchronized boolean transfer(int fromId, int toId, int amount) {
-        boolean result = false;
-        if (isElementExist(fromId) && isElementExist(toId) && storage.get(fromId).getAmount() >= amount) {
-            int currentFromIdAmount = storage.get(fromId).getAmount();
-            int currentToIdAmount = storage.get(toId).getAmount();
-            storage.get(fromId).setAmount(currentFromIdAmount - amount);
-            storage.get(toId).setAmount(currentToIdAmount + amount);
-            result = true;
+    boolean transfer(int fromId, int toId, int amount) {
+        synchronized (storage) {
+            boolean result = false;
+            if (isElementExist(fromId) && isElementExist(toId) && storage.get(fromId).getAmount() >= amount) {
+                int currentFromIdAmount = storage.get(fromId).getAmount();
+                int currentToIdAmount = storage.get(toId).getAmount();
+                storage.get(fromId).setAmount(currentFromIdAmount - amount);
+                storage.get(toId).setAmount(currentToIdAmount + amount);
+                result = true;
+            }
+            return result;
         }
-        return result;
     }
 }
