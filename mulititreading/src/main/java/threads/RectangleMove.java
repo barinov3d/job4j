@@ -5,6 +5,8 @@ package threads;
 
 import javafx.scene.shape.Rectangle;
 
+import static java.lang.Thread.currentThread;
+
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
     private int direct;
@@ -16,8 +18,7 @@ public class RectangleMove implements Runnable {
 
     @Override
     public void run() {
-        boolean flag = true;
-        while (true && flag) {
+        while (!currentThread().isInterrupted()) {
             this.rect.setX(this.rect.getX() + this.direct);
             if ((this.rect.getX() >= 300) || (this.rect.getX() <= 0)) {
                 direct = direct * (-1);
@@ -25,7 +26,7 @@ public class RectangleMove implements Runnable {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                flag = false;
+                currentThread().interrupt();
                 e.printStackTrace();
             }
         }
